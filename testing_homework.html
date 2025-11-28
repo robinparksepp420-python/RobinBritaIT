@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verification</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f1f1f1;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .content {
+      width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* TOP SCROLLING AD BANNER (McDonald's) */
+    .scroll-horizontal {
+      display: flex;
+      overflow: hidden;
+      height: 230px;
+      width: 100vw;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .scroll-inner {
+      display: flex;
+      flex-wrap: nowrap;
+      animation: scrollLeft 15s linear infinite;
+    }
+
+    .scroll-inner img {
+      width: 200px;
+      height: 230px;
+      object-fit: cover;
+      margin: 0;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* BOTTOM SCROLLING "I'M NOT A BOT" BANNER */
+    .scroll-bottom {
+      display: flex;
+      overflow: hidden;
+      height: 180px;
+      width: 100vw;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .scroll-bottom-inner {
+      display: flex;
+      flex-wrap: nowrap;
+      animation: scrollLeftBottom 20s linear infinite;
+    }
+
+    .scroll-bottom-inner img {
+      width: 300px;       /* wider so zoom effect without overlapping */
+      height: 180px;      /* taller to match new width */
+      object-fit: cover;
+      flex-shrink: 0;
+      display: block;
+      margin-right: 10px; /* spacing between images */
+      transform: none;    /* remove scale */
+    }
+
+    @keyframes scrollLeftBottom {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Verification box */
+    .box {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.15);
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      margin-top: -35px;
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 15px;
+    }
+
+    button {
+      padding: 12px;
+      width: 100%;
+      background: #007bff;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* RIGHT SIDE FULL HEIGHT SCROLLING L'OREAL AD */
+    .side-banner {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 220px;
+      height: 100vh;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .scroll-container {
+      position: absolute;
+      width: 100%;
+      height: 200%;
+      animation: scrollUp 15s linear infinite;
+    }
+
+    .scroll-container img {
+      width: 100%;
+      height: 50%;
+      object-fit: fill;
+      display: block;
+    }
+
+    @keyframes scrollUp {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    /* LEFT SIDE FULL HEIGHT SCROLLING OLD SPICE AD */
+    .left-banner {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 220px;
+      height: 100vh;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .left-scroll-container {
+      position: absolute;
+      width: 100%;
+      height: 200%;
+      animation: scrollLeftAd 15s linear infinite;
+    }
+
+    .left-scroll-container img {
+      width: 100%;
+      height: 50%;
+      object-fit: fill;
+      display: block;
+    }
+
+    @keyframes scrollLeftAd {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- TOP SCROLLING BANNER (McDonald's) -->
+<div class="scroll-horizontal">
+  <div class="scroll-inner" id="scroll-inner">
+    <img src="ad.png" alt="McDonald's Ad">
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Verification Box -->
+  <div class="box">
+    <h2>Verification Required</h2>
+
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="text" id="fieldA" placeholder="Verification Code">
+    <input type="text" id="fieldB" placeholder="Secondary Identifier">
+
+    <button onclick="check()">Continue</button>
+  </div>
+
+</div>
+
+<!-- RIGHT SIDE FULL HEIGHT L'OREAL AD -->
+<div class="side-banner">
+  <div class="scroll-container">
+    <img src="loreal_ad.pdf.png" alt="L'Oreal Ad">
+    <img src="loreal_ad.pdf.png" alt="L'Oreal Ad Duplicate">
+  </div>
+</div>
+
+<!-- LEFT SIDE FULL HEIGHT SCROLLING OLD SPICE AD -->
+<div class="left-banner">
+  <div class="left-scroll-container" id="left-scroll">
+    <img src="oldspice.png" alt="Old Spice Ad">
+    <img src="oldspice.png" alt="Old Spice Ad Duplicate">
+  </div>
+</div>
+
+<!-- BOTTOM SCROLLING "I'M NOT A BOT" BANNER (NO OVERLAP) -->
+<div class="scroll-bottom">
+  <div class="scroll-bottom-inner" id="scroll-bottom-inner">
+    <img src="not_a_bot.png" alt="I'm Not a Bot Ad">
+  </div>
+</div>
+
+<script>
+function check() {
+  const name  = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const fA    = document.getElementById("fieldA").value.trim();
+  const fB    = document.getElementById("fieldB").value.trim();
+
+  if (!name || !phone || !fA || !fB) {
+    alert("All fields are required.");
+    return;
+  }
+
+  window.location.href = "https://geekprank.com/matrix-code-rain/";
+}
+
+// duplicate the top banner infinitely
+const scrollInner = document.getElementById("scroll-inner");
+const imgTop = scrollInner.querySelector('img');
+for (let i = 0; i < 20; i++) {
+  const clone = imgTop.cloneNode(true);
+  scrollInner.appendChild(clone);
+}
+
+// duplicate the left-side Old Spice banner infinitely
+const leftScroll = document.getElementById("left-scroll");
+const imgLeft = leftScroll.querySelector('img');
+for (let i = 0; i < 20; i++) {
+  const clone = imgLeft.cloneNode(true);
+  leftScroll.appendChild(clone);
+}
+
+// duplicate the bottom "I'm Not a Bot" banner infinitely
+const bottomScroll = document.getElementById("scroll-bottom-inner");
+const imgBottom = bottomScroll.querySelector('img');
+for (let i = 0; i < 20; i++) {
+  const clone = imgBottom.cloneNode(true);
+  bottomScroll.appendChild(clone);
+}
+</script>
+
+</body>
+</html>
